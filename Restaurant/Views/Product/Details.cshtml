@@ -1,4 +1,5 @@
 ﻿@model Restaurant.Models.SanPham
+
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +8,7 @@
 
 
 <main>
-    <div class="hero_single inner_pages background-image" data-background="url(img/hero_menu.jpg)">
+    <div class="hero_single inner_pages background-image" data-background="url(https://kenh14cdn.com/2016/photo-1-1477197764312.jpg)">
         <div class="opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
             <div class="container">
                 <div class="row justify-content-center">
@@ -200,7 +201,7 @@
                                 </div>
                             </div>
                             <!-- /row -->
-                            <p class="text-end"><a href="leave-review.html" class="btn_1">Leave a review</a></p>
+                            <p class="text-end"><a asp-controller="Gopies" asp-action="Index" class="btn_1">Leave a review</a></p>
                         </div>
                         <!-- /card-body -->
                     </div>
