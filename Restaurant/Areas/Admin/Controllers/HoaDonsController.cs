@@ -22,7 +22,7 @@ namespace Restaurant.Areas.Admin.Controllers
         // GET: Admin/HoaDons
         public async Task<IActionResult> Index()
         {
-            var restaurantContext = _context.HoaDons.Include(h => h.MaKhachHangNavigation).Include(h => h.MaThanhToanNavigation).Include(h => h.MaVanChuyenNavigation);
+            var restaurantContext = _context.HoaDons.Include(h => h.MaKhachHangNavigation);
             return View(await restaurantContext.ToListAsync());
         }
 

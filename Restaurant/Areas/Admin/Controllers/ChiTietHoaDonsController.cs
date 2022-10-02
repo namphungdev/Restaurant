@@ -20,19 +20,10 @@ namespace Restaurant.Areas.Admin.Controllers
         }
 
         // GET: Admin/ChiTietHoaDons
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Index()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var cthoaDon = _context.ChiTietHoaDons.Include(c => c.MaSanPhamNavigation).Include(c => c.MaHoaDonNavigation).Where(m => m.MaHoaDon == id).ToList();
-            if (cthoaDon == null)
-            {
-                return NotFound();
-            }
-            return View(cthoaDon);
+            var restaurantContext = _context.ChiTietHoaDons.Include(c => c.MaHoaDonNavigation).Include(c => c.MaSanPhamNavigation);
+            return View(await restaurantContext.ToListAsync());
         }
 
         // GET: Admin/ChiTietHoaDons/Details/5

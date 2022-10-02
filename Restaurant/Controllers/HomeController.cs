@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Restaurant.Helpers;
 using Restaurant.Models;
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,13 +16,11 @@ namespace Restaurant.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-          
         }
 
         public IActionResult Index()
         {
             return View();
-           
         }
 
         public IActionResult Blog()
