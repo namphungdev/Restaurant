@@ -17,20 +17,18 @@ namespace Restaurant.Models
         {
         }
 
+        public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         public virtual DbSet<ChucVu> ChucVus { get; set; }
         public virtual DbSet<GopY> Gopies { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
-
-        internal dynamic ToList()
-        {
-            throw new NotImplementedException();
-        }
-
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<LoaiSanPham> LoaiSanPhams { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
+        public virtual DbSet<ThanhToan> ThanhToans { get; set; }
         public virtual DbSet<ThucDon> ThucDons { get; set; }
+        public virtual DbSet<VanChuyen> VanChuyens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -44,6 +42,45 @@ namespace Restaurant.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Admin>(entity =>
+            {
+                entity.HasKey(e => e.MaTk);
+
+                entity.ToTable("Admin");
+
+                entity.Property(e => e.Mk)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("MK");
+
+                entity.Property(e => e.Tk)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("TK");
+            });
+
+            modelBuilder.Entity<Blog>(entity =>
+            {
+                entity.HasKey(e => e.MaBlog);
+
+                entity.ToTable("Blog");
+
+                entity.Property(e => e.Anh).HasMaxLength(50);
+
+                entity.Property(e => e.NgayDang).HasColumnType("datetime");
+
+                entity.Property(e => e.NoiDung).HasMaxLength(1000);
+
+                entity.Property(e => e.TieuDe).HasMaxLength(50);
+
+                entity.Property(e => e.Tk).HasColumnName("TK");
+
+                entity.HasOne(d => d.TkNavigation)
+                    .WithMany(p => p.Blogs)
+                    .HasForeignKey(d => d.Tk)
+                    .HasConstraintName("FK_Blog_Admin");
+            });
 
             modelBuilder.Entity<ChiTietHoaDon>(entity =>
             {
@@ -104,12 +141,28 @@ namespace Restaurant.Models
 
                 entity.Property(e => e.NgayLap).HasColumnType("datetime");
 
-                entity.Property(e => e.TongTien).HasColumnType("money");
+                entity.Property(e => e.Sdt)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SDT");
+
+                entity.Property(e => e.TongTien).HasColumnType("decimal(18, 0)");
 
                 entity.HasOne(d => d.MaKhachHangNavigation)
                     .WithMany(p => p.HoaDons)
                     .HasForeignKey(d => d.MaKhachHang)
                     .HasConstraintName("FK_HoaDon_KhachHang");
+
+                entity.HasOne(d => d.MaThanhToanNavigation)
+                    .WithMany(p => p.HoaDons)
+                    .HasForeignKey(d => d.MaThanhToan)
+                    .HasConstraintName("FK_HoaDon_ThanhToan");
+
+                entity.HasOne(d => d.MaVanChuyenNavigation)
+                    .WithMany(p => p.HoaDons)
+                    .HasForeignKey(d => d.MaVanChuyen)
+                    .HasConstraintName("FK_HoaDon_VanChuyen");
             });
 
             modelBuilder.Entity<KhachHang>(entity =>
@@ -131,7 +184,11 @@ namespace Restaurant.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Sdt).HasColumnName("SDT");
+                entity.Property(e => e.Sdt)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SDT");
 
                 entity.Property(e => e.TenKhachHang).HasMaxLength(30);
 
@@ -183,12 +240,30 @@ namespace Restaurant.Models
                     .HasConstraintName("FK__SanPham__MaThucD__3C69FB99");
             });
 
+            modelBuilder.Entity<ThanhToan>(entity =>
+            {
+                entity.HasKey(e => e.MaThanhToan);
+
+                entity.ToTable("ThanhToan");
+
+                entity.Property(e => e.TrangThaiThanhToan).HasMaxLength(20);
+            });
+
             modelBuilder.Entity<ThucDon>(entity =>
             {
                 entity.HasKey(e => e.MaThucDon)
                     .HasName("PK__ThucDon__5596A475D551A1AD");
 
                 entity.ToTable("ThucDon");
+            });
+
+            modelBuilder.Entity<VanChuyen>(entity =>
+            {
+                entity.HasKey(e => e.MaVanChuyen);
+
+                entity.ToTable("VanChuyen");
+
+                entity.Property(e => e.TrangThaiVanChuyen).HasMaxLength(20);
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -13,19 +13,20 @@
     <table class="table">
         <thead>
             <tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaSanPhamNavigation.AnhSanPham)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaSanPhamNavigation)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.TongTien)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.SoLuong)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MaHoaDonNavigation)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MaSanPhamNavigation)
-                </th>
-                <th></th>
+            </tr>
             </tr>
         </thead>
         <tbody>
@@ -33,21 +34,18 @@
             {
                 <tr>
                     <td>
+                        <div class="thumb_cart" >
+                            <img src="~/img/SanPham/@Html.DisplayFor(modelItem => item.MaSanPhamNavigation.AnhSanPham)" class="lazy" style="width:40px" alt="Image">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaSanPhamNavigation.TenSanPham)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.TongTien)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.SoLuong)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MaHoaDonNavigation.MaHoaDon)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MaSanPhamNavigation.MaSanPham)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                     </td>
                 </tr>
             }

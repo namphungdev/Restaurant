@@ -14,6 +14,9 @@
         <thead>
             <tr>
                 <th>
+                    @Html.DisplayNameFor(model => model.MaHoaDon)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.NgayLap)
                 </th>
                 <th>
@@ -22,19 +25,22 @@
                 <th>
                     @Html.DisplayNameFor(model => model.SoLuong)
                 </th>
+
                 <th>
-                    @Html.DisplayNameFor(model => model.DiaChi)
+                    @Html.DisplayNameFor(model => model.MaThanhToan)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.MaKhachHangNavigation)
+                    @Html.DisplayNameFor(model => model.MaVanChuyen)
                 </th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>
+                        <a href="/Admin/ChiTietHoaDons/index/@Html.DisplayFor(modelItem => item.MaHoaDon)">#@Html.DisplayFor(modelItem => item.MaHoaDon)</a>
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.NgayLap)
                     </td>
@@ -44,17 +50,15 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.SoLuong)
                     </td>
+
                     <td>
-                        @Html.DisplayFor(modelItem => item.DiaChi)
+                        @Html.DisplayFor(modelItem => item.MaThanhToanNavigation.TrangThaiThanhToan)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.MaKhachHangNavigation.DiaChi)
+                        @Html.DisplayFor(modelItem => item.MaVanChuyenNavigation.TrangThaiVanChuyen)
                     </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.MaHoaDon">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.MaHoaDon">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.MaHoaDon">Delete</a>
-                    </td>
+
+
                 </tr>
             }
         </tbody>

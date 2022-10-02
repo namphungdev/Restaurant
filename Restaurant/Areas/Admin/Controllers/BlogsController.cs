@@ -10,23 +10,23 @@ using Restaurant.Models;
 namespace Restaurant.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class HoaDonsController : Controller
+    public class BlogsController : Controller
     {
         private readonly RestaurantContext _context;
 
-        public HoaDonsController(RestaurantContext context)
+        public BlogsController(RestaurantContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/HoaDons
+        // GET: Admin/Blogs
         public async Task<IActionResult> Index()
         {
-            var restaurantContext = _context.HoaDons.Include(h => h.MaKhachHangNavigation).Include(h => h.MaThanhToanNavigation).Include(h => h.MaVanChuyenNavigation);
+            var restaurantContext = _context.Blogs.Include(b => b.TkNavigation);
             return View(await restaurantContext.ToListAsync());
         }
 
-        // GET: Admin/HoaDons/Details/5
+        // GET: Admin/Blogs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +34,42 @@ namespace Restaurant.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var hoaDon = await _context.HoaDons
-                .Include(h => h.MaKhachHangNavigation)
-                .FirstOrDefaultAsync(m => m.MaHoaDon == id);
-            if (hoaDon == null)
+            var blog = await _context.Blogs
+                .Include(b => b.TkNavigation)
+                .FirstOrDefaultAsync(m => m.MaBlog == id);
+            if (blog == null)
             {
                 return NotFound();
             }
 
-            return View(hoaDon);
+            return View(blog);
         }
 
-        // GET: Admin/HoaDons/Create
+        // GET: Admin/Blogs/Create
         public IActionResult Create()
         {
-            ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "DiaChi");
+            ViewData["Tk"] = new SelectList(_context.Admins, "MaTk", "MaTk");
             return View();
         }
 
-        // POST: Admin/HoaDons/Create
+        // POST: Admin/Blogs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaHoaDon,MaKhachHang,NgayLap,TongTien,SoLuong,DiaChi")] HoaDon hoaDon)
+        public async Task<IActionResult> Create([Bind("MaBlog,Tk,TieuDe,NoiDung,NgayDang,Anh")] Blog blog)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(hoaDon);
+                _context.Add(blog);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "DiaChi", hoaDon.MaKhachHang);
-            return View(hoaDon);
+            ViewData["Tk"] = new SelectList(_context.Admins, "MaTk", "MaTk", blog.Tk);
+            return View(blog);
         }
 
-        // GET: Admin/HoaDons/Edit/5
+        // GET: Admin/Blogs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +77,23 @@ namespace Restaurant.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var hoaDon = await _context.HoaDons.FindAsync(id);
-            if (hoaDon == null)
+            var blog = await _context.Blogs.FindAsync(id);
+            if (blog == null)
             {
                 return NotFound();
             }
-            ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "DiaChi", hoaDon.MaKhachHang);
-            return View(hoaDon);
+            ViewData["Tk"] = new SelectList(_context.Admins, "MaTk", "MaTk", blog.Tk);
+            return View(blog);
         }
 
-        // POST: Admin/HoaDons/Edit/5
+        // POST: Admin/Blogs/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaHoaDon,MaKhachHang,NgayLap,TongTien,SoLuong,DiaChi")] HoaDon hoaDon)
+        public async Task<IActionResult> Edit(int id, [Bind("MaBlog,Tk,TieuDe,NoiDung,NgayDang,Anh")] Blog blog)
         {
-            if (id != hoaDon.MaHoaDon)
+            if (id != blog.MaBlog)
             {
                 return NotFound();
             }
@@ -102,12 +102,12 @@ namespace Restaurant.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(hoaDon);
+                    _context.Update(blog);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HoaDonExists(hoaDon.MaHoaDon))
+                    if (!BlogExists(blog.MaBlog))
                     {
                         return NotFound();
                     }
@@ -118,11 +118,11 @@ namespace Restaurant.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MaKhachHang"] = new SelectList(_context.KhachHangs, "MaKhachHang", "DiaChi", hoaDon.MaKhachHang);
-            return View(hoaDon);
+            ViewData["Tk"] = new SelectList(_context.Admins, "MaTk", "MaTk", blog.Tk);
+            return View(blog);
         }
 
-        // GET: Admin/HoaDons/Delete/5
+        // GET: Admin/Blogs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +130,31 @@ namespace Restaurant.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var hoaDon = await _context.HoaDons
-                .Include(h => h.MaKhachHangNavigation)
-                .FirstOrDefaultAsync(m => m.MaHoaDon == id);
-            if (hoaDon == null)
+            var blog = await _context.Blogs
+                .Include(b => b.TkNavigation)
+                .FirstOrDefaultAsync(m => m.MaBlog == id);
+            if (blog == null)
             {
                 return NotFound();
             }
 
-            return View(hoaDon);
+            return View(blog);
         }
 
-        // POST: Admin/HoaDons/Delete/5
+        // POST: Admin/Blogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var hoaDon = await _context.HoaDons.FindAsync(id);
-            _context.HoaDons.Remove(hoaDon);
+            var blog = await _context.Blogs.FindAsync(id);
+            _context.Blogs.Remove(blog);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HoaDonExists(int id)
+        private bool BlogExists(int id)
         {
-            return _context.HoaDons.Any(e => e.MaHoaDon == id);
+            return _context.Blogs.Any(e => e.MaBlog == id);
         }
     }
 }
