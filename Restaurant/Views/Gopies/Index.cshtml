@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Restaurant.Models.GopY>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+	<header class="header_in clearfix">
+		<div class="layer"></div><!-- Opacity Mask Menu Mobile -->
+		<div class="container-fluid">
+		<div id="logo">
+			<a  asp-action="_Layout">
+				<img src="~/img/logo_sticky.svg" width="140" height="35" alt="">
+			</a>
+		</div>
+		<ul id="top_menu">
+			<li><a href="#0" class="search-overlay-menu-btn"></a></li>
+			<li>
+				<div class="dropdown dropdown-cart">
+				    <a href="shop-cart.html" class="cart_bt"><strong>2</strong></a>
+				    <div class="dropdown-menu">
+				        <ul>
+				            <li>
+				                <figure><img src="img/item_placeholder_square_small.jpg" data-src="img/item_square_small_1.jpg" alt="" width="50" height="50" class="lazy"></figure>
+				                <strong><span>1x Pizza Napoli</span>$12.00</strong>
+				                <a href="#0" class="action"><i class="icon_trash_alt"></i></a>
+				            </li>
+				             <li>
+				                <figure><img src="img/item_placeholder_square_small.jpg" data-src="img/item_square_small_2.jpg" alt="" width="50" height="50" class="lazy"></figure>
+				                <strong><span>1x Hamburgher Maxi</span>$10.00</strong>
+				                <a href="#0" class="action"><i class="icon_trash_alt"></i></a>
+				            </li>
+				             <li>
+				                <figure><img src="img/item_placeholder_square_small.jpg" data-src="img/item_square_small_3.jpg" alt="" width="50" height="50" class="lazy"></figure>
+				                <strong><span>1x Red Wine Bottle</span>$20.00</strong>
+				                <a href="#0" class="action"><i class="icon_trash_alt"></i></a>
+				            </li>
+				        </ul>
+				        <div class="total_drop">
+				            <div class="clearfix add_bottom_15"><strong>Total</strong><span>$32.00</span></div>
+				            <a href="shop-cart.html" class="btn_1 outline">View Cart</a><a href="shop-checkout.html" class="btn_1">Checkout</a>
+				        </div>
+				    </div>
+				</div>
+				<!-- /dropdown-cart-->
+			</li>
+		</ul>
+		<!-- /top_menu -->
+		<a href="#0" class="open_close">
+			<i class="icon_menu"></i><span>Menu</span>
+		</a>
+		<nav class="main-menu">
+		    <div id="header_menu">
+		        <a href="#0" class="open_close">
+		            <i class="icon_close"></i><span>Menu</span>
+		        </a>
+		        <a href="index.html"><img src="img/logo.svg" width="140" height="35" alt=""></a>
+		    </div>
+		    <ul>
+		        <li class="submenu">
+		            <a href="#0" class="show-submenu">Home</a>
+		            <ul>
+		                <li><a href="index.html">Slider 1</a></li>
+		                <li><a href="index-2.html">Slider 2</a></li>
+		                <li><a href="index-6.html">Slider 3</a></li>
+		                <li><a href="index-3.html">Video Background</a></li>
+		                <li><a href="index-5.html">Text Rotator</a></li>
+		                <li><a href="index-4.html">GDPR Cookie Bar EU Law</a></li>
+		            </ul>
+		        </li>
+		        <li class="submenu">
+		            <a href="#0" class="show-submenu">Menu</a>
+		            <ul>
+		                <li><a href="menu-1.html">Menu 2 Column</a></li>
+		                <li><a href="menu-2.html">Menu Add To Cart</a></li>
+		                <li><a href="menu-3.html">Menu With Tabs</a></li>
+		                <li><a href="menu-4.html">Menu Grid</a></li>
+		                <li><a href="menu-of-the-day.html">Menu of the Day <span class="badge badge-danger">HOT</span></a></li>
+		                <li><a href="order-food.html">Order Food</a></li>
+		                <li><a href="confirm.html">Confirm</a></li>
+		            </ul>
+		        </li>
+		        <li class="submenu">
+		            <a href="#0" class="show-submenu">Other Pages</a>
+		            <ul>
+		            	<li><a href="about.html">About</a></li>
+		                <li><a href="blog.html">Blog</a></li>
+		                <li><a href="gallery.html">Gallery</a></li>
+		                <li><a href="gallery-2.html">Gallery Masonry</a></li>
+		                <li><a href="modal-advertise.html">Modal Advertise</a></li>
+		                <li><a href="modal-newsletter.html">Modal Newsletter</a></li>
+		                <li><a href="404.html">404 Error page</a></li>
+		                <li><a href="coming-soon.html" target="_blank">Coming Soon</a></li>
+		                <li><a href="leave-review.html">Leave a review</a></li>
+		                <li><a href="contacts.html">Contacts</a></li>
+		                <li><a href="icon-pack-1.html">Icon Pack 1</a></li>
+		                <li><a href="icon-pack-2.html">Icon Pack 2</a></li>
+		            </ul>
+		        </li>
+		         <li class="submenu">
+		            <a href="#0" class="show-submenu">Shop</a>
+		            <ul>
+		                <li><a href="shop-1.html">Shop Grid</a></li>
+		                <li><a href="shop-2.html">Shop Rows</a></li>
+		                <li><a href="shop-single.html">Product Single</a></li>
+		                <li><a href="shop-cart.html">Cart Page</a></li>
+		                <li><a href="shop-checkout.html">Checkout</a></li>
+		            </ul>
+		        </li>
+		        <li><a href="#0">Buy this template</a></li>
+		        <li><a href="reservations.html" class="btn_top">Reservations</a></li>
+		    </ul>
+		</nav>
+	</div>
+	</header>
+	<main class="pattern_2">
+	    <div class="container margin_60_40">
+	        <div class="row justify-content-center">
+	            <div class="col-lg-8">
+	                <div class="write_review">
+	                    <h1>Write a review</h1>
+	                    <div class="rating_submit">
+	                        <div class="form-group mb-2">
+	                            <label class="d-block">Overall rating</label>
+	                            <span class="rating mb-0">
+	                                <input type="radio" class="rating-input" id="5_star" name="rating-input" value="5 Stars"><label for="5_star" class="rating-star"></label>
+	                                <input type="radio" class="rating-input" id="4_star" name="rating-input" value="4 Stars"><label for="4_star" class="rating-star"></label>
+	                                <input type="radio" class="rating-input" id="3_star" name="rating-input" value="3 Stars"><label for="3_star" class="rating-star"></label>
+	                                <input type="radio" class="rating-input" id="2_star" name="rating-input" value="2 Stars"><label for="2_star" class="rating-star"></label>
+	                                <input type="radio" class="rating-input" id="1_star" name="rating-input" value="1 Star"><label for="1_star" class="rating-star"></label>
+	                            </span>
+	                        </div>
+	                    </div>
+	                    <!-- /rating_submit -->
+	                    <div class="form-group">
+	                        <label>Title of your review</label>
+	                        <input class="form-control" type="text" placeholder="If you could say it in one sentence, what would you say?">
+	                    </div>
+	                    <div class="form-group mb-5">
+	                        <label>Your review</label>
+	                        <textarea class="form-control" style="height: 280px;" placeholder="Write your review to help others learn about this online business"></textarea>
+	                    </div>
+	                    <p><a href="#0" class="btn_1">Submit review</a></p>
+	                </div>
+	            </div>
+	        </div>
+	        <!-- /row -->
+	    </div>
+	    <!-- /container -->
+	</main>

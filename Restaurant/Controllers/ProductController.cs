@@ -71,6 +71,7 @@ namespace Restaurant.Controllers
 
             return View(sanPham);
         }
+       
 
        /* public IActionResult Index(int? page)
         {
