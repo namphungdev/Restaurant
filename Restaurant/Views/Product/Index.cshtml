@@ -61,20 +61,14 @@
                         <h4><a href="#filter_1" data-bs-toggle="collapse" class="opened">Danh mục</a></h4>
                         <div class="collapse show" id="filter_1">
                             <ul>
-                                <li>
-                                <i class="fa-solid fa-angle-right"></i>
-                                   <a href="/Product">Tất cả sản phẩm</a>
-                                <span class="checkmark"></span>
-                                </li>
                                 @foreach (var item in ViewBag.DanhMuc)
                                 {
-                                    <li>
-                                        <i class="fa-solid fa-angle-right"></i>
+                                    <li>  <i class="fa-solid fa-angle-right"></i>                                  
                                         @Html.ActionLink((string)item.TenLoaiSanPham, "index", "product", new { id = item.MaLoaiSanPham })
                                         <span class="checkmark"></span>
-                                    </li>
+                                     </li>
                                 }
-
+                                
 
                             </ul>
                         </div>

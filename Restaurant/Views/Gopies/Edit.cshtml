@@ -1,23 +1,19 @@
 ﻿@model Restaurant.Models.GopY
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container-fluid">
-<h1>Create</h1>
+
+<h1>Edit</h1>
 
 <h4>GopY</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="MaGopY" class="control-label"></label>
-                <input asp-for="MaGopY" class="form-control" />
-                <span asp-validation-for="MaGopY" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="MaGopY" />
             <div class="form-group">
                 <label asp-for="NoiDung" class="control-label"></label>
                 <input asp-for="NoiDung" class="form-control" />
@@ -30,10 +26,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="MaKhachHang" class="control-label"></label>
-                <select asp-for="MaKhachHang" class ="form-control" asp-items="ViewBag.MaKhachHang"></select>
+                <select asp-for="MaKhachHang" class="form-control" asp-items="ViewBag.MaKhachHang"></select>
+                <span asp-validation-for="MaKhachHang" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -42,7 +39,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-</div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -17,6 +17,8 @@ namespace Restaurant.Models
         {
         }
 
+        public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         public virtual DbSet<ChucVu> ChucVus { get; set; }
         public virtual DbSet<GopY> Gopies { get; set; }
@@ -40,6 +42,47 @@ namespace Restaurant.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Admin>(entity =>
+            {
+                entity.HasKey(e => e.MaTk);
+
+                entity.ToTable("Admin");
+
+                entity.Property(e => e.MaTk).HasColumnName("MaTK");
+
+                entity.Property(e => e.Mk)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("MK");
+
+                entity.Property(e => e.Tk)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("TK");
+            });
+
+            modelBuilder.Entity<Blog>(entity =>
+            {
+                entity.HasKey(e => e.MaBlog);
+
+                entity.ToTable("Blog");
+
+                entity.Property(e => e.Anh).HasMaxLength(50);
+
+                entity.Property(e => e.NgayDang).HasColumnType("datetime");
+
+                entity.Property(e => e.NoiDung).HasMaxLength(1000);
+
+                entity.Property(e => e.TieuDe).HasMaxLength(50);
+
+                entity.Property(e => e.Tk).HasColumnName("TK");
+
+                entity.HasOne(d => d.TkNavigation)
+                    .WithMany(p => p.Blogs)
+                    .HasForeignKey(d => d.Tk)
+                    .HasConstraintName("FK_Blog_Admin");
+            });
 
             modelBuilder.Entity<ChiTietHoaDon>(entity =>
             {

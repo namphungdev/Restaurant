@@ -4,10 +4,10 @@
     ViewData["Title"] = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
+<div class="container-fluid">
+<h1></h1>
 
-<h1>Create</h1>
-
-<h4>SanPham</h4>
+<h4>Tạo sản phẩm mới </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -81,7 +81,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
