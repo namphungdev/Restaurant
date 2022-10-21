@@ -21,17 +21,13 @@ namespace Restaurant.Models
         public virtual DbSet<ChucVu> ChucVus { get; set; }
         public virtual DbSet<GopY> Gopies { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
-
-        internal dynamic ToList()
-        {
-            throw new NotImplementedException();
-        }
-
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<LoaiSanPham> LoaiSanPhams { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
+        public virtual DbSet<ThanhToan> ThanhToans { get; set; }
         public virtual DbSet<ThucDon> ThucDons { get; set; }
-
+        public virtual DbSet<VanChuyen> VanChuyens { get; set; }
+            
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -104,12 +100,28 @@ namespace Restaurant.Models
 
                 entity.Property(e => e.NgayLap).HasColumnType("datetime");
 
-                entity.Property(e => e.TongTien).HasColumnType("money");
+                entity.Property(e => e.Sdt)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SDT");
+
+                entity.Property(e => e.TongTien).HasColumnType("decimal(18, 0)");
 
                 entity.HasOne(d => d.MaKhachHangNavigation)
                     .WithMany(p => p.HoaDons)
                     .HasForeignKey(d => d.MaKhachHang)
                     .HasConstraintName("FK_HoaDon_KhachHang");
+
+                entity.HasOne(d => d.MaThanhToanNavigation)
+                   .WithMany(p => p.HoaDons)
+                   .HasForeignKey(d => d.MaThanhToan)
+                   .HasConstraintName("FK_HoaDon_ThanhToan");
+
+                entity.HasOne(d => d.MaVanChuyenNavigation)
+                    .WithMany(p => p.HoaDons)
+                    .HasForeignKey(d => d.MaVanChuyen)
+                    .HasConstraintName("FK_HoaDon_VanChuyen");
             });
 
             modelBuilder.Entity<KhachHang>(entity =>
@@ -131,7 +143,11 @@ namespace Restaurant.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Sdt).HasColumnName("SDT");
+                entity.Property(e => e.Sdt)
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .IsUnicode(false)
+                    .HasColumnName("SDT");
 
                 entity.Property(e => e.TenKhachHang).HasMaxLength(30);
 
@@ -183,12 +199,30 @@ namespace Restaurant.Models
                     .HasConstraintName("FK__SanPham__MaThucD__3C69FB99");
             });
 
+            modelBuilder.Entity<ThanhToan>(entity =>
+            {
+                entity.HasKey(e => e.MaThanhToan);
+
+                entity.ToTable("ThanhToan");
+
+                entity.Property(e => e.TrangThaiThanhToan).HasMaxLength(20);
+            });
+
             modelBuilder.Entity<ThucDon>(entity =>
             {
                 entity.HasKey(e => e.MaThucDon)
                     .HasName("PK__ThucDon__5596A475D551A1AD");
 
                 entity.ToTable("ThucDon");
+            });
+
+            modelBuilder.Entity<VanChuyen>(entity =>
+            {
+                entity.HasKey(e => e.MaVanChuyen);
+
+                entity.ToTable("VanChuyen");
+
+                entity.Property(e => e.TrangThaiVanChuyen).HasMaxLength(20);
             });
 
             OnModelCreatingPartial(modelBuilder);
